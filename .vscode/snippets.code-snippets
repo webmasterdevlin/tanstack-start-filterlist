@@ -1,0 +1,73 @@
+{
+    "suspense": {
+        "scope": "typescriptreact",
+        "prefix": "suspense",
+        "body": [
+            "<Suspense fallback={<${1:} }>",
+            "${TM_SELECTED_TEXT}",
+            "</Suspense>"
+        ],
+    },
+    "importForm": {
+        "scope": "typescriptreact",
+        "prefix": "importForm",
+        "body": [
+            "import Form from 'next/form';"
+        ]
+    },
+    "toggleButton": {
+        "scope": "typescriptreact",
+        "prefix": "toggleButton",
+        "body": [
+            "ToggleButton disabled>Loading...</ToggleButton>"
+        ]
+    },
+    "activeTab": {
+        "scope": "typescriptreact",
+        "prefix": "activeTab",
+        "body": [
+            "const params = useParams();",
+            "const activeTab = params.tab as TaskStatus;"
+        ]
+    },
+    "newSearchParams": {
+        "scope": "typescriptreact",
+        "prefix": "newSearchParams",
+        "body": [
+            "const newSearchParams = new URLSearchParams(searchParams.toString());",
+            "newSearchParams.set('q', e.target.value);"
+        ],
+    },
+    "pushRouter": {
+        "scope": "typescriptreact",
+        "prefix": "pushRouter",
+        "body": [
+            "router.push(`?${newSearchParams.toString()}`, {",
+            "  scroll: false,",
+            "});"
+        ]
+    },
+    "tabsProps": {
+        "scope": "typescriptreact",
+        "prefix": "tabsProps",
+        "body": [
+            "type Props = {",
+            "  taskSummaryPromise: Promise<TaskSummary>;",
+            "};"
+        ]
+    },
+    "optimisticCategories": {
+        "scope": "typescriptreact",
+        "prefix": "optimisticCategories",
+        "body": [
+            "optimisticCategories, setOptimisticCategories"
+        ]
+    },
+    "useTransition": {
+        "scope": "typescriptreact",
+        "prefix": "transition",
+        "body": [
+            "const [isPending, startTransition] = useTransition();"
+        ]
+    }
+}
