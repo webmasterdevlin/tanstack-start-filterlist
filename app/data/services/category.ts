@@ -1,8 +1,6 @@
-import 'server-only';
-
 import { cache } from 'react';
-import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
+import { prisma } from '../../db';
 
 export const getCategoriesMap = cache(async () => {
   console.log('getCategoriesMap');

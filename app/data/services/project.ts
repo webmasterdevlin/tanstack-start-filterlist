@@ -1,7 +1,5 @@
-import 'server-only';
-
-import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
+import { prisma } from '../../db';
 
 export async function getProject() {
   console.log('getProject');

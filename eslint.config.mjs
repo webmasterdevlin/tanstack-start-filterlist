@@ -29,7 +29,6 @@ const eslintConfig = [
       'plugin:react/recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:import/recommended',
-      'plugin:jsx-a11y/recommended',
       'next',
       'next/core-web-vitals',
       'prettier',
@@ -50,7 +49,6 @@ const eslintConfig = [
       sourceType: 'module',
     },
     plugins: {
-      autofix,
       'react-compiler': reactCompiler,
       'react-hooks': fixupPluginRules(reactHooks),
       'sort-keys-fix': sortKeysFix,
@@ -70,14 +68,6 @@ const eslintConfig = [
         },
       ],
       'arrow-body-style': ['warn', 'always'],
-      'autofix/no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
       'import/order': [
         'warn',
         {

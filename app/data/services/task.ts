@@ -1,8 +1,6 @@
-import 'server-only';
-
-import { prisma } from '@/db';
 import type { TaskStatus, TaskSummary } from '@/types/task';
 import { slow } from '@/utils/slow';
+import { prisma } from '../../db';
 import { getCategoriesMap } from './category';
 
 export async function getTasks(filter?: { q?: string; status?: TaskStatus; categories?: number[] }) {
