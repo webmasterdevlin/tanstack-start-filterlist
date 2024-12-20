@@ -1,7 +1,9 @@
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useNavigate } from '@tanstack/react-router';
 import React, { use, useOptimistic, useTransition } from 'react';
+import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
 import type { Category } from '@prisma/client';
+import type { ReadonlyURLSearchParams } from 'next/navigation';
 
 type Props = {
   categoriesPromise: Promise<Record<string, Category>>;
@@ -9,10 +11,10 @@ type Props = {
 
 export default function CategoryFilter({ categoriesPromise }: Props) {
   const categoriesMap = use(categoriesPromise);
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const searchParams = Route.useSearch();
+  const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
-  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams.getAll('category'));
+  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams['category'] as string[]);
 
   return (
     <div data-pending={isPending ? '' : undefined}>
@@ -24,17 +26,17 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
             value: category.id.toString(),
           };
         })}
-        selectedValues={optimisticCategories}
+        selectedValues={[...optimisticCategories]}
         onToggle={newCategories => {
-          const params = new URLSearchParams(searchParams);
+          const params = new URLSearchParams(searchParams as ReadonlyURLSearchParams);
           params.delete('category');
           newCategories.forEach(category => {
             return params.append('category', category);
           });
           startTransition(() => {
             setOptimisticCategories(newCategories);
-            router.push(`?${params.toString()}`, {
-              scroll: false,
+            navigate({
+              to: `?${params.toString()}`,
             });
           });
         }}

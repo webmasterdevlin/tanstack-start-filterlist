@@ -1,15 +1,16 @@
+import { useNavigate } from '@tanstack/react-router';
 import Form from 'next/form';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import React, { useTransition } from 'react';
+import { Route } from '@/routes/$tab';
 import type { TaskStatus } from '@/types/task';
 import SearchStatus from './ui/SearchStatus';
 
 export default function Search() {
-  const router = useRouter();
-  const params = useParams();
+  const navigate = useNavigate();
+  const params = Route.useParams();
   const activeTab = params.tab as TaskStatus;
-  const searchParams = useSearchParams();
-  const q = searchParams.get('q') || '';
+  const searchParams = Route.useSearch();
+  const q = searchParams['q'] || '';
   const [isPending, startTransition] = useTransition();
 
   return (
@@ -24,8 +25,8 @@ export default function Search() {
           const newSearchParams = new URLSearchParams(searchParams.toString());
           newSearchParams.set('q', e.target.value);
           startTransition(() => {
-            router.push(`?${newSearchParams.toString()}`, {
-              scroll: false,
+            navigate({
+              to: `?${newSearchParams.toString()}`
             });
           });
         }}

@@ -7,6 +7,7 @@ import LoadTime from '@/components/LoadTime';
 import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getTaskSummary } from '@/data/services/task';
+import { getCategoriesMapFn } from '@/functions/category';
 import { getTaskSummaryFn } from '@/functions/task';
 
 export const Route = createRootRoute({
@@ -49,6 +50,7 @@ const TanStackRouterDevtools =
 
 function RootComponent() {
   const taskSummary = useServerFn(getTaskSummaryFn);
+  const categories = useServerFn(getCategoriesMapFn);
 
   return (
     <RootDocument>
@@ -65,10 +67,10 @@ function RootComponent() {
           </div>
           <div className="h-[1px] bg-primary" />
           <Suspense fallback={<SearchSkeleton />}>
-            {/* <Search /> */}
+            <Search />
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            {/* <CategoryFilter categoriesPromise={categories} /> */}
+            {/* <CategoryFilter categoriesPromise={categories()} /> */}
           </Suspense>
           <Outlet />
         </div>
