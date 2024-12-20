@@ -1,4 +1,4 @@
-// app/router.tsx
+import './globals.css';
 import { createRouter as createTanStackRouter } from '@tanstack/react-router';
 import { registerGlobalMiddleware } from '@tanstack/start';
 import { authMiddleware } from './middleware/auth-guard';

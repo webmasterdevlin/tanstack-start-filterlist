@@ -2,6 +2,8 @@
 import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
+import LoadTime from '@/components/LoadTime';
+import { cn } from '@/utils/cn';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -58,8 +60,14 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <Meta />
       </head>
-      <body>
-        {children}
+      <body className={'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'}>
+        <div className="group flex flex-col gap-10">
+          <div className="flex flex-col gap-6">
+            <h1>Project information</h1>
+          </div>
+          {children}
+        </div>
+        <LoadTime />
         <ScrollRestoration />
         <Scripts />
       </body>

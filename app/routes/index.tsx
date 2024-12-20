@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { registerGlobalMiddleware } from '@tanstack/start';
-import { authMiddleware } from '../middleware/auth-guard';
-import { loggingMiddleware } from '../middleware/logger';
+import { authMiddleware } from '@/middleware/auth-guard';
+import { loggingMiddleware } from '@/middleware/logger';
 
 registerGlobalMiddleware({
   middleware: [authMiddleware, loggingMiddleware],
