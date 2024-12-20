@@ -1,5 +1,3 @@
-'use client';
-
 import Form from 'next/form';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import React, { useTransition } from 'react';

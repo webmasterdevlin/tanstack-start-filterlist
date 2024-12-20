@@ -1,12 +1,13 @@
 // app/routes/__root.tsx
 import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router';
-import { Meta, Scripts } from '@tanstack/start';
+import { Meta, Scripts, useServerFn } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
-import { CategoryFilterSkeleton } from '@/components/CategoryFilter';
+import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
-import { SearchSkeleton } from '@/components/Search';
+import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getTaskSummary } from '@/data/services/task';
+import { getTaskSummaryFn } from '@/functions/task';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -47,7 +48,7 @@ const TanStackRouterDevtools =
     );
 
 function RootComponent() {
-  const taskSummary = getTaskSummary();
+  const taskSummary = useServerFn(getTaskSummaryFn);
 
   return (
     <RootDocument>
@@ -56,13 +57,19 @@ function RootComponent() {
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
           </div>
-          {/* <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
             <h2>Task list</h2>
             <Suspense fallback={<StatusTabsSkeleton />}>
-              <StatusTabs taskSummaryPromise={taskSummary} />
+              <StatusTabs taskSummaryPromise={taskSummary()} />
             </Suspense>
-          </div> */}
+          </div>
           <div className="h-[1px] bg-primary" />
+          <Suspense fallback={<SearchSkeleton />}>
+            {/* <Search /> */}
+          </Suspense>
+          <Suspense fallback={<CategoryFilterSkeleton />}>
+            {/* <CategoryFilter categoriesPromise={categories} /> */}
+          </Suspense>
           <Outlet />
         </div>
         <LoadTime />
@@ -84,7 +91,6 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         {children}
-        <LoadTime />
         <ScrollRestoration />
         <Scripts />
       </body>

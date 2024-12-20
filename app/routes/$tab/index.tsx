@@ -42,9 +42,8 @@ export const Route = createFileRoute('/$tab/')({
 })
 
 function RouteComponent() {
-  const params = Route.useParams();
-  const { category } = Route.useSearch();
   const data = Route.useLoaderData();
+
   return <div className="overflow-x-auto rounded group-has-[[data-pending]]:animate-pulse">
     <table>
       <thead>

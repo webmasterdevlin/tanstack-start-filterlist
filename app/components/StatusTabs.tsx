@@ -1,5 +1,5 @@
-import { useParams } from 'next/navigation';
 import React, { use } from 'react';
+import { Route } from '@/routes/$tab';
 import type { TaskStatus, TaskSummary } from '@/types/task';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
@@ -13,7 +13,7 @@ type Props = {
 
 export default function StatusTabs({ taskSummaryPromise }: Props) {
   const taskSummary = use(taskSummaryPromise);
-  const activeTab = useParams().tab as TaskStatus;
+  const activeTab = Route.useParams().tab as TaskStatus;
 
   const mapTasks = (status: TaskStatus) => {
     return (

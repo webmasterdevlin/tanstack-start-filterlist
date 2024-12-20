@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 import type { TaskStatus } from '@/types/task';
 import { cn } from '@/utils/cn';
 
@@ -13,14 +13,13 @@ type Props = {
 export default function NavTab({ href, children, activeTab, tabId, header }: Props) {
   return (
     <Link
-      scroll={false}
       className={cn(
         activeTab === tabId
           ? 'border-primary bg-primary-light dark:bg-neutral-800'
           : 'border-transparent bg-primary-lighter dark:bg-neutral-900',
         'flex w-full min-w-fit flex-col gap-3 border-b-4 p-3 -outline-offset-2 hover:bg-primary-light focus:outline-2 focus:outline-primary sm:gap-6 sm:p-6 dark:hover:bg-neutral-800',
       )}
-      href={href}
+      to={href}
     >
       <h3 className="text-lg font-semibold">{header}</h3>
       {children}

@@ -1,5 +1,3 @@
-'use client';
-
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { use, useOptimistic, useTransition } from 'react';
 import ToggleGroup from './ui/ToggleGroup';
