@@ -1,5 +1,4 @@
 import { useNavigate } from '@tanstack/react-router';
-import Form from 'next/form';
 import React, { useTransition } from 'react';
 import { Route } from '@/routes/$tab';
 import type { TaskStatus } from '@/types/task';
@@ -14,7 +13,7 @@ export default function Search() {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <Form action="" className="relative flex w-full flex-col gap-1 sm:w-fit" key={activeTab}>
+    <form action="" className="relative flex w-full flex-col gap-1 sm:w-fit" key={activeTab}>
       <label className="font-semibold uppercase" htmlFor="search">
         Search
       </label>
@@ -37,7 +36,7 @@ export default function Search() {
         type="search"
       />
       <SearchStatus searching={isPending} />
-    </Form>
+    </form>
   );
 }
 
