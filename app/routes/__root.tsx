@@ -2,8 +2,11 @@
 import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
+import { CategoryFilterSkeleton } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
-import { cn } from '@/utils/cn';
+import { SearchSkeleton } from '@/components/Search';
+import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
+import { getTaskSummary } from '@/data/services/task';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -28,25 +31,44 @@ export const Route = createRootRoute({
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => {
-        return null;
-      } // Render nothing in production
+      return null;
+    } // Render nothing in production
     : lazy(() =>
-        // Lazy load in development
-        {
-          return import('@tanstack/router-devtools').then(res => {
-            return {
-              default: res.TanStackRouterDevtools,
-              // For Embedded Mode
-              // default: res.TanStackRouterDevtoolsPanel
-            };
-          });
-        },
-      );
+    // Lazy load in development
+    {
+      return import('@tanstack/router-devtools').then(res => {
+        return {
+          default: res.TanStackRouterDevtools,
+          // For Embedded Mode
+          // default: res.TanStackRouterDevtoolsPanel
+        };
+      });
+    },
+    );
 
 function RootComponent() {
+  const taskSummary = getTaskSummary();
+
   return (
     <RootDocument>
-      <Outlet />
+      <div className={'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'}>
+        <div className="group flex flex-col gap-10">
+          <div className="flex flex-col gap-6">
+            <h1>Project information</h1>
+          </div>
+          {/* <div className="flex flex-col gap-6">
+            <h2>Task list</h2>
+            <Suspense fallback={<StatusTabsSkeleton />}>
+              <StatusTabs taskSummaryPromise={taskSummary} />
+            </Suspense>
+          </div> */}
+          <div className="h-[1px] bg-primary" />
+          <Outlet />
+        </div>
+        <LoadTime />
+        <ScrollRestoration />
+        <Scripts />
+      </div>
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>
@@ -60,13 +82,8 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <Meta />
       </head>
-      <body className={'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'}>
-        <div className="group flex flex-col gap-10">
-          <div className="flex flex-col gap-6">
-            <h1>Project information</h1>
-          </div>
-          {children}
-        </div>
+      <body>
+        {children}
         <LoadTime />
         <ScrollRestoration />
         <Scripts />

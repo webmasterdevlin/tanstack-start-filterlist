@@ -1,3 +1,4 @@
+import { connection } from 'next/server';
 import type { TaskStatus, TaskSummary } from '@/types/task';
 import { slow } from '@/utils/slow';
 import { prisma } from '../../db';

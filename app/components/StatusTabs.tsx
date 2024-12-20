@@ -1,5 +1,3 @@
-'use client';
-
 import { useParams } from 'next/navigation';
 import React, { use } from 'react';
 import type { TaskStatus, TaskSummary } from '@/types/task';
