@@ -14,7 +14,9 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
   const searchParams = Route.useSearch();
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
-  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams['category'] as string[]);
+  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams.category ?? []);
+
+  console.log('optimisticCategories ', optimisticCategories);
 
   return (
     <div data-pending={isPending ? '' : undefined}>
@@ -26,7 +28,7 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
             value: category.id.toString(),
           };
         })}
-        selectedValues={[...optimisticCategories]}
+        selectedValues={optimisticCategories}
         onToggle={newCategories => {
           const params = new URLSearchParams(searchParams as ReadonlyURLSearchParams);
           params.delete('category');

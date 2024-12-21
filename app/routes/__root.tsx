@@ -70,7 +70,7 @@ function RootComponent() {
             <Search />
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            {/* <CategoryFilter categoriesPromise={categories()} /> */}
+            <CategoryFilter categoriesPromise={categories()} />
           </Suspense>
           <Outlet />
         </div>
