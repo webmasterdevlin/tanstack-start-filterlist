@@ -28,7 +28,7 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
             value: category.id.toString(),
           };
         })}
-        selectedValues={optimisticCategories}
+        selectedValues={[...optimisticCategories]}
         onToggle={newCategories => {
           const params = new URLSearchParams(searchParams as ReadonlyURLSearchParams);
           params.delete('category');
