@@ -4,6 +4,7 @@ import { Meta, Scripts, useServerFn } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
+import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getTaskSummary } from '@/data/services/task';
@@ -58,6 +59,7 @@ function RootComponent() {
         <div className="group flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
+            <ProjectInfo />
           </div>
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
@@ -67,10 +69,10 @@ function RootComponent() {
           </div>
           <div className="h-[1px] bg-primary" />
           <Suspense fallback={<SearchSkeleton />}>
-            <Search />
+            {/* <Search /> */}
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            <CategoryFilter categoriesPromise={categories()} />
+            {/* <CategoryFilter categoriesPromise={categories()} /> */}
           </Suspense>
           <Outlet />
         </div>

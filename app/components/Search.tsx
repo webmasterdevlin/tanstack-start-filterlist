@@ -9,7 +9,7 @@ export default function Search() {
   const params = Route.useParams();
   const activeTab = params.tab as TaskStatus;
   const searchParams = Route.useSearch();
-  const q = searchParams['q'] || '';
+  const q = searchParams.q || '';
   const [isPending, startTransition] = useTransition();
 
   return (

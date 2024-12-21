@@ -14,7 +14,7 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
   const searchParams = Route.useSearch();
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
-  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams.category ?? []);
+  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams.category || []);
 
   console.log('optimisticCategories ', optimisticCategories);
 

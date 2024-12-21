@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 import React from 'react';
 import { cn } from '@/utils/cn';
 
@@ -25,7 +25,7 @@ export default function ToggleGroup({ options, selectedValues, toggleKey, onTogg
         const isActive = selectedValues.includes(option.value.toString());
         return (
           <Link
-            href={`?${toggleKey}=${isActive ? '' : option.value}`}
+            to={`?${toggleKey}=${isActive ? '' : option.value}`}
             key={option.value}
             className={cn(isActive ? activeClass : inactiveClass, 'w-fit rounded border border-primary px-4 py-2')}
             onClick={e => {
