@@ -21,10 +21,10 @@ function Info({ label, value }: { label: string; value: string }) {
 }
 
 export default function ProjectInfo() {
-  const projectFn = useServerFn(getProjectFn);
+  const projectFn = getProject();
 
   return (
-    <Await promise={projectFn()}>
+    <Await promise={projectFn}>
       {(project) => {
         return <div className="flex gap-16">
           <div className="flex flex-col gap-2">

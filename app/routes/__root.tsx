@@ -69,10 +69,10 @@ function RootComponent() {
           </div>
           <div className="h-[1px] bg-primary" />
           <Suspense fallback={<SearchSkeleton />}>
-            {/* <Search /> */}
+            <Search />
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            {/* <CategoryFilter categoriesPromise={categories()} /> */}
+            <CategoryFilter categoriesPromise={categories()} />
           </Suspense>
           <Outlet />
         </div>
