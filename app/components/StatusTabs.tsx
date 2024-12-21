@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import React, { use } from 'react';
 import { Route } from '@/routes/$tab';
 import type { TaskStatus, TaskSummary } from '@/types/task';
@@ -39,18 +40,18 @@ export default function StatusTabs({ taskSummaryPromise }: Props) {
 
   return (
     <NavTabs>
-      <NavTab href="/todo" header={`TODO (${getTaskCount('todo')})`} activeTab={activeTab} tabId="todo">
+      <NavTab href="todo" header={`TODO (${getTaskCount('todo')})`} activeTab={activeTab} tabId="todo">
         {mapTasks('todo')}
       </NavTab>
       <NavTab
-        href="/inprogress"
+        href="inprogress"
         header={`IN PROGRESS (${getTaskCount('inprogress')})`}
         activeTab={activeTab}
         tabId="inprogress"
       >
         {mapTasks('inprogress')}
       </NavTab>
-      <NavTab href="/done" header={`DONE (${getTaskCount('done')})`} activeTab={activeTab} tabId="done">
+      <NavTab href="done" header={`DONE (${getTaskCount('done')})`} activeTab={activeTab} tabId="done">
         {mapTasks('done')}
       </NavTab>
     </NavTabs>

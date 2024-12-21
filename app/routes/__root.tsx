@@ -7,6 +7,7 @@ import LoadTime from '@/components/LoadTime';
 import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
+import { getCategoriesMap } from '@/data/services/category';
 import { getTaskSummary } from '@/data/services/task';
 import { getCategoriesMapFn } from '@/functions/category';
 import { getTaskSummaryFn } from '@/functions/task';
@@ -50,8 +51,11 @@ const TanStackRouterDevtools =
     );
 
 function RootComponent() {
-  const taskSummary = useServerFn(getTaskSummaryFn);
-  const categories = useServerFn(getCategoriesMapFn);
+  // const taskSummary = useServerFn(getTaskSummaryFn);
+  // const categories = useServerFn(getCategoriesMapFn);
+
+  const taskSummary = getTaskSummary();
+  const categories = getCategoriesMap();
 
   return (
     <RootDocument>
@@ -64,7 +68,7 @@ function RootComponent() {
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
             <Suspense fallback={<StatusTabsSkeleton />}>
-              <StatusTabs taskSummaryPromise={taskSummary()} />
+              <StatusTabs taskSummaryPromise={taskSummary} />
             </Suspense>
           </div>
           <div className="h-[1px] bg-primary" />
@@ -72,7 +76,7 @@ function RootComponent() {
             <Search />
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            <CategoryFilter categoriesPromise={categories()} />
+            <CategoryFilter categoriesPromise={categories} />
           </Suspense>
           <Outlet />
         </div>
