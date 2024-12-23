@@ -1,14 +1,12 @@
 // app/routes/__root.tsx
-import { Link, Outlet, ScrollRestoration, createRootRoute, useLoaderData } from '@tanstack/react-router';
-import { Meta, Scripts, useServerFn } from '@tanstack/start';
+import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router';
+import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
 import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
-import { getCategoriesMap } from '@/data/services/category';
-import { getTaskSummary } from '@/data/services/task';
 import { getCategoriesMapFn } from '@/functions/category';
 import { getProjectFn } from '@/functions/project';
 import { getTaskSummaryFn } from '@/functions/task';
@@ -59,11 +57,6 @@ const TanStackRouterDevtools =
     );
 
 function RootComponent() {
-  // const taskSummary = useServerFn(getTaskSummaryFn);
-  // const categories = useServerFn(getCategoriesMapFn);
-
-  // const taskSummary = useServerFn(getTaskSummaryFn);
-  // const categories = useServerFn(getCategoriesMapFn);
 
   const { taskSummary, categories } = Route.useLoaderData();
 
