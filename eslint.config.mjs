@@ -51,11 +51,11 @@ const eslintConfig = [
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': fixupPluginRules(reactHooks),
-      'sort-keys-fix': sortKeysFix,
+      // 'sort-keys-fix': sortKeysFix,
     },
     rules: {
       'react-compiler/react-compiler': 'error',
-      'sort-keys-fix/sort-keys-fix': 'warn',
+      // 'sort-keys-fix/sort-keys-fix': 'warn',
     },
   },
   {

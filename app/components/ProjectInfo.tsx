@@ -3,6 +3,7 @@ import { useServerFn } from '@tanstack/start';
 import React, { use, useEffect } from 'react';
 import { getProject } from '@/data/services/project';
 import { getProjectFn } from '@/functions/project';
+import { Route } from '@/routes/__root';
 import Skeleton from './ui/Skeleton';
 
 function Chip({ children }: { children: React.ReactNode }) {
@@ -22,7 +23,8 @@ function Info({ label, value }: { label: string; value: string }) {
 
 export default function ProjectInfo() {
   // const project = useServerFn(getProjectFn);
-  const project = getProject();
+  // const project = getProject();
+  const { project } = Route.useLoaderData();
 
   return (
     <Await promise={project}>

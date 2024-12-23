@@ -1,5 +1,5 @@
 // app/routes/__root.tsx
-import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router';
+import { Link, Outlet, ScrollRestoration, createRootRoute, useLoaderData } from '@tanstack/react-router';
 import { Meta, Scripts, useServerFn } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
@@ -10,6 +10,7 @@ import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getCategoriesMap } from '@/data/services/category';
 import { getTaskSummary } from '@/data/services/task';
 import { getCategoriesMapFn } from '@/functions/category';
+import { getProjectFn } from '@/functions/project';
 import { getTaskSummaryFn } from '@/functions/task';
 
 export const Route = createRootRoute({
@@ -30,6 +31,18 @@ export const Route = createRootRoute({
       ],
     };
   },
+  loader: () => {
+    return {
+      categories: [],
+      project: [],
+      taskSummary: [],
+    };
+    // return {
+    //   categories: getCategoriesMapFn(),
+    //   project: getProjectFn(),
+    //   taskSummary: getTaskSummaryFn(),
+    // };
+  }
 });
 
 const TanStackRouterDevtools =
@@ -54,29 +67,33 @@ function RootComponent() {
   // const taskSummary = useServerFn(getTaskSummaryFn);
   // const categories = useServerFn(getCategoriesMapFn);
 
-  const taskSummary = getTaskSummary();
-  const categories = getCategoriesMap();
+  // const taskSummary = useServerFn(getTaskSummaryFn);
+  // const categories = useServerFn(getCategoriesMapFn);
+
+  // const { taskSummary, categories } = Route.useLoaderData();
 
   return (
     <RootDocument>
       <div className={'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'}>
+        <Link to="/test-a">Test A</Link>
+        <Link to="/test-b">Test B</Link>
         <div className="group flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
-            <ProjectInfo />
+            {/* <ProjectInfo /> */}
           </div>
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
             <Suspense fallback={<StatusTabsSkeleton />}>
-              <StatusTabs taskSummaryPromise={taskSummary} />
+              {/* <StatusTabs taskSummaryPromise={taskSummary} /> */}
             </Suspense>
           </div>
           <div className="h-[1px] bg-primary" />
           <Suspense fallback={<SearchSkeleton />}>
-            <Search />
+            {/* <Search /> */}
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            <CategoryFilter categoriesPromise={categories} />
+            {/* <CategoryFilter categoriesPromise={categories} /> */}
           </Suspense>
           <Outlet />
         </div>
