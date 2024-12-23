@@ -11,24 +11,10 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TestBImport } from './routes/test-b'
-import { Route as TestAImport } from './routes/test-a'
 import { Route as IndexImport } from './routes/index'
 import { Route as TabIndexImport } from './routes/$tab/index'
 
 // Create/Update Routes
-
-const TestBRoute = TestBImport.update({
-  id: '/test-b',
-  path: '/test-b',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const TestARoute = TestAImport.update({
-  id: '/test-a',
-  path: '/test-a',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -53,20 +39,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/test-a': {
-      id: '/test-a'
-      path: '/test-a'
-      fullPath: '/test-a'
-      preLoaderRoute: typeof TestAImport
-      parentRoute: typeof rootRoute
-    }
-    '/test-b': {
-      id: '/test-b'
-      path: '/test-b'
-      fullPath: '/test-b'
-      preLoaderRoute: typeof TestBImport
-      parentRoute: typeof rootRoute
-    }
     '/$tab/': {
       id: '/$tab/'
       path: '/$tab'
@@ -81,46 +53,36 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/test-a': typeof TestARoute
-  '/test-b': typeof TestBRoute
   '/$tab': typeof TabIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/test-a': typeof TestARoute
-  '/test-b': typeof TestBRoute
   '/$tab': typeof TabIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/test-a': typeof TestARoute
-  '/test-b': typeof TestBRoute
   '/$tab/': typeof TabIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/test-a' | '/test-b' | '/$tab'
+  fullPaths: '/' | '/$tab'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/test-a' | '/test-b' | '/$tab'
-  id: '__root__' | '/' | '/test-a' | '/test-b' | '/$tab/'
+  to: '/' | '/$tab'
+  id: '__root__' | '/' | '/$tab/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  TestARoute: typeof TestARoute
-  TestBRoute: typeof TestBRoute
   TabIndexRoute: typeof TabIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  TestARoute: TestARoute,
-  TestBRoute: TestBRoute,
   TabIndexRoute: TabIndexRoute,
 }
 
@@ -135,19 +97,11 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/test-a",
-        "/test-b",
         "/$tab/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/test-a": {
-      "filePath": "test-a.tsx"
-    },
-    "/test-b": {
-      "filePath": "test-b.tsx"
     },
     "/$tab/": {
       "filePath": "$tab/index.tsx"

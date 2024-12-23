@@ -70,8 +70,6 @@ function RootComponent() {
   return (
     <RootDocument>
       <div className={'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'}>
-        <Link to="/test-a">Test A</Link>
-        <Link to="/test-b">Test B</Link>
         <div className="group flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
