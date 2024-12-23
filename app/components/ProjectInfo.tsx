@@ -1,8 +1,4 @@
-import { Await } from '@tanstack/react-router';
-import { useServerFn } from '@tanstack/start';
-import React, { use, useEffect } from 'react';
-import { getProject } from '@/data/services/project';
-import { getProjectFn } from '@/functions/project';
+import React from 'react';
 import { Route } from '@/routes/__root';
 import Skeleton from './ui/Skeleton';
 
