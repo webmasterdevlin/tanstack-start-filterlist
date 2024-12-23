@@ -31,14 +31,13 @@ export const Route = createFileRoute('/$tab/')({
   },
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
   loader: ({ deps: { category, q }, params: { tab } }) => {
-    return []
-    // return getTasksFn({
-    //   data: {
-    //     categories: Array.isArray(category) ? category.map(Number) : category ? [Number(category)] : undefined,
-    //     q,
-    //     status: tab,
-    //   }
-    // });
+    return getTasksFn({
+      data: {
+        categories: Array.isArray(category) ? category.map(Number) : category ? [Number(category)] : undefined,
+        q,
+        status: tab,
+      }
+    });
   },
 })
 

@@ -31,17 +31,12 @@ export const Route = createRootRoute({
       ],
     };
   },
-  loader: () => {
+  loader: async () => {
     return {
-      categories: [],
-      project: [],
-      taskSummary: [],
+      categories: getCategoriesMapFn(),
+      project: await getProjectFn(),
+      taskSummary: getTaskSummaryFn(),
     };
-    // return {
-    //   categories: getCategoriesMapFn(),
-    //   project: getProjectFn(),
-    //   taskSummary: getTaskSummaryFn(),
-    // };
   }
 });
 
@@ -70,7 +65,7 @@ function RootComponent() {
   // const taskSummary = useServerFn(getTaskSummaryFn);
   // const categories = useServerFn(getCategoriesMapFn);
 
-  // const { taskSummary, categories } = Route.useLoaderData();
+  const { taskSummary, categories } = Route.useLoaderData();
 
   return (
     <RootDocument>
@@ -80,20 +75,20 @@ function RootComponent() {
         <div className="group flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
-            {/* <ProjectInfo /> */}
+            <ProjectInfo />
           </div>
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
             <Suspense fallback={<StatusTabsSkeleton />}>
-              {/* <StatusTabs taskSummaryPromise={taskSummary} /> */}
+              <StatusTabs taskSummaryPromise={taskSummary} />
             </Suspense>
           </div>
           <div className="h-[1px] bg-primary" />
           <Suspense fallback={<SearchSkeleton />}>
-            {/* <Search /> */}
+            <Search />
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            {/* <CategoryFilter categoriesPromise={categories} /> */}
+            <CategoryFilter categoriesPromise={categories} />
           </Suspense>
           <Outlet />
         </div>

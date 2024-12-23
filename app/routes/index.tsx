@@ -9,16 +9,16 @@ registerGlobalMiddleware({
 
 export const Route = createFileRoute('/')({
   beforeLoad: () => {
-    // throw redirect({
-    //   params: {
-    //     tab: 'todo',
-    //   },
-    //   to: '/$tab',
-    // })
+    throw redirect({
+      params: {
+        tab: 'todo',
+      },
+      to: '/$tab',
+    })
   },
   component: Home
 });
 
 function Home() {
-  return <>hihi</>;
+  return <></>;
 }
