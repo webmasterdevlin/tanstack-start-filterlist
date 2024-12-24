@@ -1,0 +1,38 @@
+# Ignore node_modules - this is standard
+node_modules/
+
+# Ignore build output directories
+dist/
+build/
+
+# Ignore Vite cache
+.vite/
+
+# Ignore temporary files
+*.log
+*.lock
+*.tmp
+*.cache
+
+# Ignore configuration or environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore generated files (like coverage reports)
+coverage/
+
+# Ignore TypeScript declaration files (if you don't want to lint them)
+*.d.ts
+
+# Ignore specific IDE/project files
+.vscode/
+.idea/
+
+# Ignore Prettier configuration (to avoid potential conflicts if you use Prettier)
+.prettierrc
+.prettierrc.js
+prettierrc
+.prettierignore
