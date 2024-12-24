@@ -8,8 +8,7 @@ export default function Search() {
   const navigate = useNavigate();
   const params = Route.useParams();
   const activeTab = params.tab as TaskStatus;
-  const searchParams = Route.useSearch();
-  const q = searchParams.q || '';
+  const { q } = Route.useSearch();
   const [isPending, startTransition] = useTransition();
 
   return (
@@ -21,11 +20,15 @@ export default function Search() {
         autoComplete="off"
         id="search"
         onChange={e => {
-          const newSearchParams = new URLSearchParams(searchParams.toString());
-          newSearchParams.set('q', e.target.value);
           startTransition(() => {
             navigate({
-              to: `?${newSearchParams.toString()}`
+              replace: true,
+              search: old => {
+                return {
+                  ...old,
+                  q: e.target.value ?? ''
+                };
+              },
             });
           });
         }}

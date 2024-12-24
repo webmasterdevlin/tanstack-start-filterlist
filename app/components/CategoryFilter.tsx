@@ -3,7 +3,6 @@ import React, { use, useOptimistic, useTransition } from 'react';
 import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
 import type { Category } from '@prisma/client';
-import type { ReadonlyURLSearchParams } from 'next/navigation';
 
 type Props = {
   categoriesPromise: Promise<Record<string, Category>>;
@@ -11,10 +10,10 @@ type Props = {
 
 export default function CategoryFilter({ categoriesPromise }: Props) {
   const categoriesMap = use(categoriesPromise);
-  const searchParams = Route.useSearch();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const { category } = Route.useSearch();
   const [isPending, startTransition] = useTransition();
-  const [optimisticCategories, setOptimisticCategories] = useOptimistic(searchParams.category || []);
+  const [optimisticCategories, setOptimisticCategories] = useOptimistic(category || []);
 
   console.log('optimisticCategories ', optimisticCategories);
 
@@ -30,15 +29,16 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
         })}
         selectedValues={[...optimisticCategories]}
         onToggle={newCategories => {
-          const params = new URLSearchParams(searchParams as ReadonlyURLSearchParams);
-          params.delete('category');
-          newCategories.forEach(category => {
-            return params.append('category', category);
-          });
           startTransition(() => {
             setOptimisticCategories(newCategories);
             navigate({
-              to: `?${params.toString()}`,
+              replace: true,
+              search: old => {
+                return {
+                  ...old,
+                  category: +newCategories[0],
+                };
+              },
             });
           });
         }}
