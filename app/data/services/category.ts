@@ -14,6 +14,6 @@ export const getCategoriesMap = cache(async () => {
       acc[category.id] = category;
       return acc;
     },
-    {} as Record<string, (typeof categories)[0]>,
+    {} as Record<string, (typeof categories)[0]>
   );
 });
