@@ -1,0 +1,46 @@
+import { registerGlobalMiddleware } from '@tanstack/start';
+
+export const globalMiddleware1 = createMiddleware().server(async ({ next }) => {
+  console.log('globalMiddleware1');
+  return next();
+});
+
+export const globalMiddleware2 = createMiddleware().server(async ({ next }) => {
+  console.log('globalMiddleware2');
+  return next();
+});
+
+registerGlobalMiddleware({
+  middleware: [globalMiddleware1, globalMiddleware2],
+});
+
+export const a = createMiddleware().server(async ({ next }) => {
+  console.log('a');
+  return next();
+});
+
+export const b = createMiddleware()
+  .middleware([a])
+  .server(async ({ next }) => {
+    console.log('b');
+    return next();
+  });
+
+export const c = createMiddleware()
+  .middleware()
+  .server(async ({ next }) => {
+    console.log('c');
+    return next();
+  });
+
+export const d = createMiddleware()
+  .middleware([b, c])
+  .server(async () => {
+    console.log('d');
+  });
+
+export const fn = createServerFn()
+  .middleware([d])
+  .server(async () => {
+    console.log('fn');
+  });

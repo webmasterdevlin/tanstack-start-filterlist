@@ -1,4 +1,3 @@
-import { connection } from 'next/server';
 import type { TaskStatus, TaskSummary } from '@/types/task';
 import { slow } from '@/utils/slow';
 import { prisma } from '../../db';
@@ -37,7 +36,6 @@ export async function getTasks(filter?: { q?: string; status?: TaskStatus; categ
 export async function getTaskSummary(): Promise<TaskSummary> {
   console.log('getTaskSummary');
 
-  await connection();
   await slow(1500);
 
   const categoriesMap = await getCategoriesMap();
