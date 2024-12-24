@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react';
 import { z } from 'zod';
 import { ActionIcon } from '@/components/ui/icons/ActionIcon';
-import { getTasksFn } from '@/functions/task';
+import { getTasksFn } from '@/data/functions/task';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
 import Loading from './-components/loading';

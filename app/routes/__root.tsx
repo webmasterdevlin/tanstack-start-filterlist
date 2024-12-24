@@ -7,9 +7,9 @@ import LoadTime from '@/components/LoadTime';
 import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
-import { getCategoriesMapFn } from '@/functions/category';
-import { getProjectFn } from '@/functions/project';
-import { getTaskSummaryFn } from '@/functions/task';
+import { getCategoriesMapFn } from '@/data/functions/category';
+import { getProjectFn } from '@/data/functions/project';
+import { getTaskSummaryFn } from '@/data/functions/task';
 
 export const Route = createRootRoute({
   component: RootComponent,
