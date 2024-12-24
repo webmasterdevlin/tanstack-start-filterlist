@@ -2,6 +2,7 @@
   "name": "nextjs-filterlist",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
@@ -26,7 +27,6 @@
     "clsx": "^2.1.1",
     "eslint": "9.17.0",
     "eslint-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
-    "next": "15.1.2",
     "postcss": "^8.4.49",
     "prisma": "^6.1.0",
     "react": "^19.0.0",
