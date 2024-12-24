@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
-import React, { use, useOptimistic, useTransition } from 'react';
+import { use, useTransition } from 'react';
 import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
 import type { Category } from '@prisma/client';
@@ -13,9 +13,6 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
   const navigate = useNavigate({ from: Route.fullPath });
   const { category } = Route.useSearch();
   const [isPending, startTransition] = useTransition();
-  const [optimisticCategories, setOptimisticCategories] = useOptimistic(category || []);
-
-  console.log('optimisticCategories ', optimisticCategories);
 
   return (
     <div data-pending={isPending ? '' : undefined}>
@@ -27,10 +24,9 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
             value: category.id.toString(),
           };
         })}
-        selectedValues={[...optimisticCategories]}
+        selectedValues={[...category || []]}
         onToggle={newCategories => {
           startTransition(() => {
-            setOptimisticCategories(newCategories);
             navigate({
               replace: true,
               search: old => {
