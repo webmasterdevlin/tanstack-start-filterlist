@@ -32,7 +32,7 @@ export const Route = createRootRoute({
   loader: async () => {
     return {
       categories: getCategoriesMapFn(),
-      project: await getProjectFn(),
+      project: getProjectFn(),
       taskSummary: getTaskSummaryFn(),
     };
   }
@@ -57,7 +57,6 @@ const TanStackRouterDevtools =
     );
 
 function RootComponent() {
-
   const { taskSummary, categories } = Route.useLoaderData();
 
   return (
@@ -77,10 +76,10 @@ function RootComponent() {
           <div className="h-[1px] bg-primary" />
           {/* <Suspense fallback={<SearchSkeleton />}>
             <Search />
-          </Suspense>
+          </Suspense> */}
           <Suspense fallback={<CategoryFilterSkeleton />}>
             <CategoryFilter categoriesPromise={categories} />
-          </Suspense> */}
+          </Suspense>
           <Outlet />
         </div>
         <LoadTime />

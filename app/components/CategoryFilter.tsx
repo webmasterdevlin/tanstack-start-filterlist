@@ -36,7 +36,7 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
               search: old => {
                 return {
                   ...old,
-                  category: +newCategories[0],
+                  category: newCategories,
                 };
               },
             });
