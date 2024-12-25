@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useRouter } from '@tanstack/react-router';
 import { use, useTransition } from 'react';
 import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
@@ -9,13 +9,13 @@ type Props = {
 };
 
 export default function CategoryFilter({ categoriesPromise }: Props) {
+  const router = useRouter();
   const categoriesMap = use(categoriesPromise);
   const navigate = useNavigate({ from: Route.fullPath });
   const { category } = Route.useSearch();
-  const [isPending, startTransition] = useTransition();
 
   return (
-    <div data-pending={isPending ? '' : undefined}>
+    <div data-pending={router.state.isLoading ? '' : undefined}>
       <ToggleGroup
         toggleKey="category"
         options={Object.values(categoriesMap).map(category => {
@@ -26,16 +26,14 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
         })}
         selectedValues={[...category || []]}
         onToggle={newCategories => {
-          startTransition(() => {
-            navigate({
-              replace: true,
-              search: old => {
-                return {
-                  ...old,
-                  category: newCategories,
-                };
-              },
-            });
+          navigate({
+            replace: true,
+            search: old => {
+              return {
+                ...old,
+                category: newCategories,
+              };
+            },
           });
         }}
       />

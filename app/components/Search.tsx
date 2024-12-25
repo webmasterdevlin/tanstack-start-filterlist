@@ -1,15 +1,14 @@
-import { useNavigate } from '@tanstack/react-router';
-import React, { useTransition } from 'react';
+import { useNavigate, useRouter } from '@tanstack/react-router';
 import { Route } from '@/routes/$tab';
 import type { TaskStatus } from '@/types/task';
 import SearchStatus from './ui/SearchStatus';
 
 export default function Search() {
-  const navigate = useNavigate();
+  const router = useRouter();
+  const navigate = useNavigate({ from: Route.fullPath });
   const params = Route.useParams();
   const activeTab = params.tab as TaskStatus;
   const { q } = Route.useSearch();
-  const [isPending, startTransition] = useTransition();
 
   return (
     <form action="" className="relative flex w-full flex-col gap-1 sm:w-fit" key={activeTab}>
@@ -19,17 +18,15 @@ export default function Search() {
       <input
         autoComplete="off"
         id="search"
-        onChange={e => {
-          startTransition(() => {
-            navigate({
-              replace: true,
-              search: old => {
-                return {
-                  ...old,
-                  q: e.target.value ?? ''
-                };
-              },
-            });
+        onChange={async e => {
+          navigate({
+            replace: true,
+            search: old => {
+              return {
+                ...old,
+                q: e.target.value ?? ""
+              };
+            },
           });
         }}
         defaultValue={q}
@@ -38,7 +35,7 @@ export default function Search() {
         placeholder="Search in task title or description..."
         type="search"
       />
-      <SearchStatus searching={isPending} />
+      <SearchStatus searching={router.state.isTransitioning} />
     </form>
   );
 }
