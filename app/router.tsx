@@ -6,8 +6,7 @@ export function createRouter() {
   const router = createTanStackRouter({
     routeTree,
     defaultPreload: 'intent',
-    defaultStaleTime: 1000 * 60 * 5,
-    defaultGcTime: 1000 * 60 * 60,
+    defaultStaleTime: 1000 * 60 * 5, // 5 minutes
     defaultErrorComponent: ({ error }) => {
       return <div>{error.message}</div>;
     },

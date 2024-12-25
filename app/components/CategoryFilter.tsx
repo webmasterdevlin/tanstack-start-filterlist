@@ -1,5 +1,5 @@
 import { useNavigate, useRouter } from '@tanstack/react-router';
-import { use, useTransition } from 'react';
+import { use } from 'react';
 import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
 import type { Category } from '@prisma/client';

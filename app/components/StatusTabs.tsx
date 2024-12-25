@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import { use } from 'react';
 import { Route } from '@/routes/$tab';
 import type { TaskStatus, TaskSummary } from '@/types/task';
 import { cn } from '@/utils/cn';
