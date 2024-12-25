@@ -12,7 +12,7 @@ export async function getProject() {
     },
   });
 
-  const project = projects.map(proj => {
+  const project = projects.map((proj) => {
     return {
       ...proj,
       teamMembers: proj.teamMembers.reduce(
@@ -24,7 +24,10 @@ export async function getProject() {
           acc[member.role].members.push(member);
           return acc;
         },
-        {} as Record<string, { count: number; members: typeof proj.teamMembers }>,
+        {} as Record<
+          string,
+          { count: number; members: typeof proj.teamMembers }
+        >
       ),
     };
   });
