@@ -5,13 +5,17 @@ import { getTasksFn } from '@/data/functions/task';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
 import Skeleton from '@/components/ui/Skeleton';
+import Loading from './-components/loading';
+import NotFound from './-components/not-found';
 
 export const Route = createFileRoute('/$tab/')({
   component: RouteComponent,
+  pendingComponent: () => <Loading />,
+  notFoundComponent: () => <NotFound />,
   params: {
     parse: params => {
       return {
-        tab: z.string().parse(params.tab),
+        tab: z.enum(["todo", "inprogress", "done"]).parse(params.tab),
       };
     },
     stringify: ({ tab }) => {
