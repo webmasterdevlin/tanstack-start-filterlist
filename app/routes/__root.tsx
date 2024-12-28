@@ -1,7 +1,14 @@
-import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router';
+import globalStyle from '../globals.css?url';
+import {
+  Outlet,
+  ScrollRestoration,
+  createRootRoute,
+} from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
-import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
+import CategoryFilter, {
+  CategoryFilterSkeleton,
+} from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
 import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
@@ -29,9 +36,9 @@ export const Route = createRootRoute({
       links: [
         {
           rel: 'stylesheet',
-          href: '../globals.css',
+          href: globalStyle,
         },
-      ]
+      ],
     };
   },
   loader: async () => {
@@ -40,33 +47,37 @@ export const Route = createRootRoute({
       project: getProjectFn(),
       taskSummary: getTaskSummaryFn(),
     };
-  }
+  },
 });
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => {
-      return null;
-    } // Render nothing in production
+        return null;
+      } // Render nothing in production
     : lazy(() =>
-    // Lazy load in development
-    {
-      return import('@tanstack/router-devtools').then(res => {
-        return {
-          default: res.TanStackRouterDevtools,
-          // For Embedded Mode
-          // default: res.TanStackRouterDevtoolsPanel
-        };
-      });
-    },
-    );
+        // Lazy load in development
+        {
+          return import('@tanstack/router-devtools').then((res) => {
+            return {
+              default: res.TanStackRouterDevtools,
+              // For Embedded Mode
+              // default: res.TanStackRouterDevtoolsPanel
+            };
+          });
+        }
+      );
 
 function RootComponent() {
   const { taskSummary, categories } = Route.useLoaderData();
 
   return (
     <RootDocument>
-      <div className={'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'}>
+      <div
+        className={
+          'flex flex-col px-4 py-6 sm:px-16 sm:py-16 xl:px-48 2xl:px-96'
+        }
+      >
         <div className="group flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
