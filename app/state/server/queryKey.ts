@@ -1,3 +1,6 @@
 export const names = {
-  project: "project",
+  categories: 'categories',
+  project: 'project',
+  tasks: 'tasks',
+  taskSummary: 'taskSummary',
 } as const;

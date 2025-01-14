@@ -1,7 +1,7 @@
 import React from 'react';
 import Skeleton from './ui/Skeleton';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import projectQueryOptions from '@/state/server/queries/projectQueries';
+import { projectQueryOptions } from '@/state/server/queries/projectQueries';
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (

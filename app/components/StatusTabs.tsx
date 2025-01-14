@@ -8,11 +8,10 @@ import NavTab from './ui/nav-tabs/NavTab';
 import NavTabs from './ui/nav-tabs/NavTabs';
 
 type Props = {
-  taskSummaryPromise: Promise<TaskSummary>;
+  taskSummary: TaskSummary
 };
 
-export default function StatusTabs({ taskSummaryPromise }: Props) {
-  const taskSummary = use(taskSummaryPromise);
+export default function StatusTabs({ taskSummary }: Props) {
   const activeTab = Route.useParams().tab as TaskStatus;
 
   const mapTasks = (status: TaskStatus) => {

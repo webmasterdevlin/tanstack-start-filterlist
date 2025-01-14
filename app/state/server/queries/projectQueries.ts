@@ -6,7 +6,7 @@ import { useServerFn } from "@tanstack/start";
 /* This function won't send an http request if not necessary.
  * So we can use this function to sync states in different components
  * */
-export default function projectQueryOptions() {
+export function projectQueryOptions() {
   const project = useServerFn(getProjectFn);
 
   return queryOptions({
