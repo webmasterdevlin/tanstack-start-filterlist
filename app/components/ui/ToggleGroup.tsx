@@ -1,5 +1,4 @@
 import { Link } from '@tanstack/react-router';
-import React from 'react';
 import { cn } from '@/utils/cn';
 
 type ToggleOption = {
@@ -10,14 +9,12 @@ type ToggleOption = {
 type Props = {
   options: ToggleOption[];
   selectedValues: string[];
-  toggleKey: string;
   onToggle: (_options: string[]) => void;
 };
 
 export default function ToggleGroup({
   options,
   selectedValues,
-  toggleKey,
   onToggle,
 }: Props) {
   const inactiveClass =
@@ -30,15 +27,13 @@ export default function ToggleGroup({
       {options.map((option) => {
         const isActive = selectedValues.includes(option.value.toString());
         return (
-          <Link
-            to={`?${toggleKey}=${isActive ? '' : option.value}`}
+          <button
             key={option.value}
             className={cn(
               isActive ? activeClass : inactiveClass,
               'w-fit rounded border border-primary px-4 py-2'
             )}
             onClick={(e) => {
-              e.preventDefault();
               if (isActive) {
                 onToggle(
                   selectedValues.filter((selectedValue) => {
@@ -51,7 +46,7 @@ export default function ToggleGroup({
             }}
           >
             {option.label}
-          </Link>
+          </button>
         );
       })}
     </div>

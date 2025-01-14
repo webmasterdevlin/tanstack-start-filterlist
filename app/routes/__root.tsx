@@ -14,7 +14,6 @@ import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getCategoriesMapFn } from '@/data/functions/category';
-import { getProjectFn } from '@/data/functions/project';
 import { getTaskSummaryFn } from '@/data/functions/task';
 import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -47,7 +46,7 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
       ],
     };
   },
-  loader: ({ context: { queryClient } }) => {
+  loader: () => {
     return {
       categories: getCategoriesMapFn(),
       taskSummary: getTaskSummaryFn(),

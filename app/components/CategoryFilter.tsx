@@ -17,7 +17,6 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
   return (
     <div data-pending={router.state.isLoading ? '' : undefined}>
       <ToggleGroup
-        toggleKey="category"
         options={Object.values(categoriesMap).map((category) => {
           return {
             label: category.name,
