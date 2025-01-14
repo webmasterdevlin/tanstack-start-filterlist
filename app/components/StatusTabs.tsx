@@ -8,10 +8,11 @@ import NavTab from './ui/nav-tabs/NavTab';
 import NavTabs from './ui/nav-tabs/NavTabs';
 
 type Props = {
-  taskSummary: TaskSummary
+  taskSummaryPromise: Promise<TaskSummary>;
 };
 
-export default function StatusTabs({ taskSummary }: Props) {
+export default function StatusTabs({ taskSummaryPromise }: Props) {
+  const taskSummary = use(taskSummaryPromise);
   const activeTab = Route.useParams().tab as TaskStatus;
 
   const mapTasks = (status: TaskStatus) => {
@@ -38,7 +39,12 @@ export default function StatusTabs({ taskSummary }: Props) {
 
   return (
     <NavTabs>
-      <NavTab href="todo" header={`TODO (${getTaskCount('todo')})`} activeTab={activeTab} tabId="todo">
+      <NavTab
+        href="todo"
+        header={`TODO (${getTaskCount('todo')})`}
+        activeTab={activeTab}
+        tabId="todo"
+      >
         {mapTasks('todo')}
       </NavTab>
       <NavTab
@@ -49,7 +55,12 @@ export default function StatusTabs({ taskSummary }: Props) {
       >
         {mapTasks('inprogress')}
       </NavTab>
-      <NavTab href="done" header={`DONE (${getTaskCount('done')})`} activeTab={activeTab} tabId="done">
+      <NavTab
+        href="done"
+        header={`DONE (${getTaskCount('done')})`}
+        activeTab={activeTab}
+        tabId="done"
+      >
         {mapTasks('done')}
       </NavTab>
     </NavTabs>

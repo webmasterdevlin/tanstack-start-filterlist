@@ -16,10 +16,8 @@ import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getCategoriesMapFn } from '@/data/functions/category';
 import { getProjectFn } from '@/data/functions/project';
 import { getTaskSummaryFn } from '@/data/functions/task';
-import { QueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { categoriesQueryOptions } from '@/state/server/queries/categoryQueries';
-import { taskSummaryQueryOptions } from '@/state/server/queries/taskQueries';
 
 interface RootRouterContext {
   queryClient: QueryClient;
@@ -51,8 +49,8 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
   },
   loader: ({ context: { queryClient } }) => {
     return {
-      categories: queryClient.ensureQueryData(categoriesQueryOptions()),
-      taskSummary: queryClient.ensureQueryData(taskSummaryQueryOptions()),
+      categories: getCategoriesMapFn(),
+      taskSummary: getTaskSummaryFn(),
     };
   },
 });
@@ -76,8 +74,7 @@ const TanStackRouterDevtools =
       );
 
 function RootComponent() {
-  const { data: taskSummary } = useSuspenseQuery(taskSummaryQueryOptions());
-  const { data: categories } = useSuspenseQuery(categoriesQueryOptions());
+  const { taskSummary, categories } = Route.useLoaderData();
 
   return (
     <RootDocument>
@@ -94,7 +91,7 @@ function RootComponent() {
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
             <Suspense fallback={<StatusTabsSkeleton />}>
-              <StatusTabs taskSummary={taskSummary} />
+              <StatusTabs taskSummaryPromise={taskSummary} />
             </Suspense>
           </div>
           <div className="h-[1px] bg-primary" />
@@ -102,7 +99,7 @@ function RootComponent() {
             <Search />
           </Suspense>
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            <CategoryFilter categoriesMap={categories} />
+            <CategoryFilter categoriesPromise={categories} />
           </Suspense>
           <Outlet />
         </div>

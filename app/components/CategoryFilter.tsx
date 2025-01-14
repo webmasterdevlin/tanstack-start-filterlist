@@ -5,11 +5,12 @@ import ToggleGroup from './ui/ToggleGroup';
 import type { Category } from '@prisma/client';
 
 type Props = {
-  categoriesMap: Record<string, Category>;
+  categoriesPromise: Promise<Record<string, Category>>;
 };
 
-export default function CategoryFilter({ categoriesMap }: Props) {
+export default function CategoryFilter({ categoriesPromise }: Props) {
   const router = useRouter();
+  const categoriesMap = use(categoriesPromise);
   const navigate = useNavigate({ from: Route.fullPath });
   const { category } = Route.useSearch();
 
