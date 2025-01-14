@@ -2,7 +2,7 @@ import globalStyle from '../globals.css?url';
 import {
   Outlet,
   ScrollRestoration,
-  createRootRoute,
+  createRootRouteWithContext,
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
@@ -16,8 +16,14 @@ import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getCategoriesMapFn } from '@/data/functions/category';
 import { getProjectFn } from '@/data/functions/project';
 import { getTaskSummaryFn } from '@/data/functions/task';
+import { QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-export const Route = createRootRoute({
+interface RootRouterContext {
+  queryClient: QueryClient;
+}
+
+export const Route = createRootRouteWithContext<RootRouterContext>()({
   component: RootComponent,
   head: () => {
     return {
@@ -44,7 +50,6 @@ export const Route = createRootRoute({
   loader: async () => {
     return {
       categories: getCategoriesMapFn(),
-      project: getProjectFn(),
       taskSummary: getTaskSummaryFn(),
     };
   },
@@ -53,20 +58,20 @@ export const Route = createRootRoute({
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => {
-      return null;
-    } // Render nothing in production
+        return null;
+      } // Render nothing in production
     : lazy(() =>
-    // Lazy load in development
-    {
-      return import('@tanstack/router-devtools').then((res) => {
-        return {
-          default: res.TanStackRouterDevtools,
-          // For Embedded Mode
-          // default: res.TanStackRouterDevtoolsPanel
-        };
-      });
-    }
-    );
+        // Lazy load in development
+        {
+          return import('@tanstack/router-devtools').then((res) => {
+            return {
+              default: res.TanStackRouterDevtools,
+              // For Embedded Mode
+              // default: res.TanStackRouterDevtoolsPanel
+            };
+          });
+        }
+      );
 
 function RootComponent() {
   const { taskSummary, categories } = Route.useLoaderData();
@@ -103,8 +108,9 @@ function RootComponent() {
         <Scripts />
       </div>
       <Suspense>
-        <TanStackRouterDevtools />
+        <TanStackRouterDevtools position="bottom-right" />
       </Suspense>
+      <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
     </RootDocument>
   );
 }

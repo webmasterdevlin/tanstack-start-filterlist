@@ -1,12 +1,13 @@
 import React from 'react';
 import Skeleton from './ui/Skeleton';
-import { Await } from '@tanstack/react-router';
-import { getProjectFn } from '@/data/functions/project';
-import { Route } from '@/routes/__root';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import projectQueryOptions from '@/state/server/queries/projectQueries';
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="w-fit bg-black px-2 py-1 uppercase text-white dark:bg-white dark:text-black">{children}</span>
+    <span className="w-fit bg-black px-2 py-1 uppercase text-white dark:bg-white dark:text-black">
+      {children}
+    </span>
   );
 }
 
@@ -20,11 +21,10 @@ function Info({ label, value }: { label: string; value: string }) {
 }
 
 export default function ProjectInfo() {
-  // const { project } = Route.useLoaderData();
-  const project = getProjectFn();
+  const { data: project } = useSuspenseQuery(projectQueryOptions());
 
-  return (<Await promise={project} fallback={<ProjectInfoSkeleton />}>
-    {project => (<div className="flex gap-16">
+  return (
+    <div className="flex gap-16">
       <div className="flex flex-col gap-2">
         <span className="font-bold">About the project</span>
         <Info label="Project name:" value={project.name} />
@@ -33,26 +33,35 @@ export default function ProjectInfo() {
           label="Duration:"
           value={`${project.startDate.getFullYear()}-${project.expectedLaunchDate.getFullYear()}`}
         />
-        <Info label="Expected launch:" value={project.expectedLaunchDate.toLocaleDateString()} />
+        <Info
+          label="Expected launch:"
+          value={project.expectedLaunchDate.toLocaleDateString()}
+        />
       </div>
       <div className="hidden flex-col gap-2 sm:flex">
         <span className="font-bold">Team members</span>
         {Object.entries(project.teamMembers).map(([role, member]) => {
-          return <Chip key={role}>{`${role.split('-').join(' ')} (${member.count})`}</Chip>;
+          return (
+            <Chip
+              key={role}
+            >{`${role.split('-').join(' ')} (${member.count})`}</Chip>
+          );
         })}
       </div>
       <div className="hidden flex-col gap-2 md:flex">
         <span className="font-bold">Deliverables</span>
-        {project.deliverables.split(';').map(deliverable => {
+        {project.deliverables.split(';').map((deliverable) => {
           return (
-            <span key={deliverable} className="w-fit bg-black px-2 py-1 text-white dark:bg-white dark:text-black">
+            <span
+              key={deliverable}
+              className="w-fit bg-black px-2 py-1 text-white dark:bg-white dark:text-black"
+            >
               {deliverable}
             </span>
           );
         })}
       </div>
-    </div>)}
-  </Await>
+    </div>
   );
 }
 
