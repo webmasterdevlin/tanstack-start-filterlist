@@ -11,10 +11,10 @@ export default defineConfig({
   },
 
   server: {
-    preset: 'node-server',
-    prerender: {
-      routes: ['/'],
-      crawlLinks: true,
-    },
+    preset: 'vercel',
+    // prerender: {
+    //   routes: ['/'],
+    //   crawlLinks: true,
+    // },
   },
 });
