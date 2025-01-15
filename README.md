@@ -1,5 +1,8 @@
 # TanStack Filter List based on the Next.js 15 Filter List of @aurorascharff a.k.a. The RSC Queen 👸
 
+Link to the Next.js 15 Filter List of @aurorascharff:
+- https://github.com/aurorascharff/next15-filterlist
+
 An interactive, progressively enhanced (not fully) project task manager with filtering using TanStack Start with Tailwind CSS and Prisma. It's been purposely slowed down to showcase the handling of loading state.
 
 ## Getting Started
