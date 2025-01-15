@@ -26,6 +26,7 @@ export default function NavTab({
         'flex w-full min-w-fit flex-col gap-3 border-b-4 p-3 -outline-offset-2 hover:bg-primary-light focus:outline-2 focus:outline-primary sm:gap-6 sm:p-6 dark:hover:bg-neutral-800'
       )}
       to="/$tab"
+      resetScroll={false}
       params={{ tab: href }}
     >
       <h3 className="text-lg font-semibold">{header}</h3>
