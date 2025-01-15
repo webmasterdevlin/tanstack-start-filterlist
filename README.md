@@ -1,8 +1,6 @@
 # TanStack Filter List based on the Next.js 15 Filter List of @aurorascharff a.k.a. The RSC Queen 👸
 
-An interactive, progressively enhanced (not fully) project task manager with filtering using Next.js 15 with Tailwind CSS and Prisma. It's been purposely slowed down to showcase the handling of loading state.
-
-See `filter-provider` branch for a context API version, which batches all filters into a single state, fixing the problem of them being discarded when toggling across multiple.
+An interactive, progressively enhanced (not fully) project task manager with filtering using TanStack Start with Tailwind CSS and Prisma. It's been purposely slowed down to showcase the handling of loading state.
 
 ## Getting Started
 
@@ -47,7 +45,4 @@ npm run prisma.seed
 ```
 
 ## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- https://tanstack.com/router/latest/docs/framework/react/start/hosting
