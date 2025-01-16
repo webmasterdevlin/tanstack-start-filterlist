@@ -72,7 +72,7 @@ const TanStackRouterDevtools =
         }
       );
 
-function RootComponent() {
+export function RootComponent() {
   const { taskSummary, categories } = Route.useLoaderData();
 
   return (
