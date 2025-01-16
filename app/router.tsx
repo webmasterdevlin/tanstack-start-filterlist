@@ -19,7 +19,7 @@ export function createRouter() {
       context: {
         queryClient,
       },
-      defaultPreload: 'intent',
+      defaultPreload: 'viewport',
       defaultStaleTime: 1000 * 60 * 5, // 5 minutes
       defaultErrorComponent: ({ error }) => {
         return <div>{error.message}</div>;
