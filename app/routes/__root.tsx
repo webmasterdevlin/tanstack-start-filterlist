@@ -57,20 +57,20 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => {
-        return null;
-      } // Render nothing in production
+      return null;
+    } // Render nothing in production
     : lazy(() =>
-        // Lazy load in development
-        {
-          return import('@tanstack/router-devtools').then((res) => {
-            return {
-              default: res.TanStackRouterDevtools,
-              // For Embedded Mode
-              // default: res.TanStackRouterDevtoolsPanel
-            };
-          });
-        }
-      );
+    // Lazy load in development
+    {
+      return import('@tanstack/router-devtools').then((res) => {
+        return {
+          default: res.TanStackRouterDevtools,
+          // For Embedded Mode
+          // default: res.TanStackRouterDevtoolsPanel
+        };
+      });
+    }
+    );
 
 export function RootComponent() {
   const { taskSummary, categories } = Route.useLoaderData();
