@@ -16,7 +16,6 @@ import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getCategoriesMapFn } from '@/data/functions/category';
 import { getTaskSummaryFn } from '@/data/functions/task';
 import { QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 interface RootRouterContext {
   queryClient: QueryClient;
@@ -57,20 +56,38 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => {
-      return null;
-    } // Render nothing in production
+        return null;
+      } // Render nothing in production
     : lazy(() =>
-    // Lazy load in development
-    {
-      return import('@tanstack/router-devtools').then((res) => {
-        return {
-          default: res.TanStackRouterDevtools,
-          // For Embedded Mode
-          // default: res.TanStackRouterDevtoolsPanel
-        };
-      });
-    }
-    );
+        // Lazy load in development
+        {
+          return import('@tanstack/router-devtools').then((res) => {
+            return {
+              default: res.TanStackRouterDevtools,
+              // For Embedded Mode
+              // default: res.TanStackRouterDevtoolsPanel
+            };
+          });
+        }
+      );
+
+const ReactQueryDevtools =
+  process.env.NODE_ENV === 'production'
+    ? () => {
+        return null;
+      } // Render nothing in production
+    : lazy(() =>
+        // Lazy load in development
+        {
+          return import('@tanstack/react-query-devtools').then((res) => {
+            return {
+              default: res.ReactQueryDevtools,
+              // For Embedded Mode
+              // default: res.ReactQueryDevtoolsPanel
+            };
+          });
+        }
+      );
 
 export function RootComponent() {
   const { taskSummary, categories } = Route.useLoaderData();
@@ -111,7 +128,12 @@ export function RootComponent() {
       <Suspense>
         <TanStackRouterDevtools position="bottom-right" />
       </Suspense>
-      <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+      <Suspense>
+        <ReactQueryDevtools
+          buttonPosition="bottom-left"
+          initialIsOpen={false}
+        />
+      </Suspense>
     </RootDocument>
   );
 }
