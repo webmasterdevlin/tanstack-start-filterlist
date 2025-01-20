@@ -11,20 +11,25 @@ export default function Search() {
   const { q } = Route.useSearch();
 
   return (
-    <form action="" className="relative flex w-full flex-col gap-1 sm:w-fit" key={activeTab}>
+    <form
+      action=""
+      className="relative flex w-full flex-col gap-1 sm:w-fit"
+      key={activeTab}
+    >
       <label className="font-semibold uppercase" htmlFor="search">
         Search
       </label>
       <input
         autoComplete="off"
         id="search"
-        onChange={async e => {
+        onChange={async (e) => {
           navigate({
             replace: true,
-            search: old => {
+            resetScroll: false,
+            search: (old) => {
               return {
                 ...old,
-                q: e.target.value ?? ""
+                q: e.target.value ?? '',
               };
             },
           });
@@ -41,5 +46,7 @@ export default function Search() {
 }
 
 export function SearchSkeleton() {
-  return <input className="mt-7 w-full sm:w-96" placeholder="Loading..." disabled />;
+  return (
+    <input className="mt-7 w-full sm:w-96" placeholder="Loading..." disabled />
+  );
 }
