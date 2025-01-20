@@ -10,6 +10,7 @@ import NotFound from './-components/not-found';
 
 export const Route = createFileRoute('/$tab/')({
   component: RouteComponent,
+  preloadStaleTime: 1000 * 60 * 5,
   pendingComponent: () => <Loading />,
   notFoundComponent: () => <NotFound />,
   params: {
