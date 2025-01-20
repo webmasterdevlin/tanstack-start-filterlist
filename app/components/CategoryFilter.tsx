@@ -27,6 +27,7 @@ export default function CategoryFilter({ categoriesPromise }: Props) {
         onToggle={(newCategories) => {
           navigate({
             replace: true,
+            resetScroll: false,
             search: (old) => {
               return {
                 ...old,
