@@ -7,7 +7,7 @@ export default function Search() {
   const router = useRouter();
   const navigate = useNavigate({ from: Route.fullPath });
   const params = Route.useParams();
-  const activeTab = params.tab as TaskStatus;
+  const activeTab = params.tab; // as TaskStatus; no need to cast
   const { q } = Route.useSearch();
 
   return (

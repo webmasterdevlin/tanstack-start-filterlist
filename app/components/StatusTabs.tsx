@@ -13,7 +13,7 @@ type Props = {
 
 export default function StatusTabs({ taskSummaryPromise }: Props) {
   const taskSummary = use(taskSummaryPromise);
-  const activeTab = Route.useParams().tab as TaskStatus;
+  const activeTab = Route.useParams().tab; // as TaskStatus; no need to cast
 
   const mapTasks = (status: TaskStatus) => {
     return (
