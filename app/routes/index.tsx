@@ -7,11 +7,6 @@ export const Route = createFileRoute('/')({
         tab: 'todo',
       },
       to: '/$tab',
-    })
+    });
   },
-  component: Home
 });
-
-function Home() {
-  return <></>;
-}
