@@ -1,18 +1,21 @@
-import { Await, createFileRoute } from '@tanstack/react-router';
+import {
+  Await,
+  createFileRoute,
+  ErrorComponent,
+  notFound,
+} from '@tanstack/react-router';
 import { z } from 'zod';
 import { ActionIcon } from '@/components/ui/icons/ActionIcon';
 import { getTasksFn } from '@/data/functions/task';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
 import Skeleton from '@/components/ui/Skeleton';
-import Loading from './-components/loading';
-import NotFound from './-components/not-found';
 
 export const Route = createFileRoute('/$tab/')({
   component: RouteComponent,
   preloadStaleTime: 1000 * 60 * 5,
-  pendingComponent: () => <Loading />,
-  notFoundComponent: () => <NotFound />,
+  staleTime: 1000 * 60 * 5,
+  pendingComponent: () => <Skeleton />,
   params: {
     parse: (params) => {
       return {
