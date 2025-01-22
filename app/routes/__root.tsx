@@ -11,7 +11,7 @@ import CategoryFilter, {
 } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
 import ProjectInfo, { ProjectInfoSkeleton } from '@/components/ProjectInfo';
-import Search, { SearchSkeleton } from '@/components/Search';
+import Search from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
 import { getCategoriesMapFn } from '@/data/functions/category';
 import { getTaskSummaryFn } from '@/data/functions/task';
