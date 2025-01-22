@@ -66,8 +66,8 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
   },
   loader: () => {
     return {
-      categories: getCategoriesMapFn(),
-      taskSummary: getTaskSummaryFn(),
+      categoriesPromise: getCategoriesMapFn(),
+      taskSummaryPromise: getTaskSummaryFn(),
     };
   },
 });
@@ -109,8 +109,6 @@ const ReactQueryDevtools =
       );
 
 export function RootComponent() {
-  const { taskSummary, categories } = Route.useLoaderData();
-
   return (
     <RootDocument>
       <div
@@ -128,15 +126,13 @@ export function RootComponent() {
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
             <Suspense fallback={<StatusTabsSkeleton />}>
-              <StatusTabs taskSummaryPromise={taskSummary} />
+              <StatusTabs />
             </Suspense>
           </div>
           <div className="h-[1px] bg-primary" />
-          <Suspense fallback={<SearchSkeleton />}>
-            <Search />
-          </Suspense>
+          <Search />
           <Suspense fallback={<CategoryFilterSkeleton />}>
-            <CategoryFilter categoriesPromise={categories} />
+            <CategoryFilter />
           </Suspense>
           <Outlet />
         </div>

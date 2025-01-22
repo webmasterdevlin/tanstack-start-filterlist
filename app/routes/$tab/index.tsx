@@ -1,9 +1,4 @@
-import {
-  Await,
-  createFileRoute,
-  ErrorComponent,
-  notFound,
-} from '@tanstack/react-router';
+import { Await, createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 import { ActionIcon } from '@/components/ui/icons/ActionIcon';
 import { getTasksFn } from '@/data/functions/task';
@@ -43,7 +38,7 @@ export const Route = createFileRoute('/$tab/')({
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
   loader: ({ deps: { category, q }, params: { tab } }) => {
     return {
-      tasks: getTasksFn({
+      tasksPromise: getTasksFn({
         data: {
           categories: Array.isArray(category)
             ? category.map(Number)
@@ -59,10 +54,10 @@ export const Route = createFileRoute('/$tab/')({
 });
 
 function RouteComponent() {
-  const { tasks } = Route.useLoaderData();
+  const { tasksPromise } = Route.useLoaderData();
 
   return (
-    <Await promise={tasks} fallback={<Skeleton />}>
+    <Await promise={tasksPromise} fallback={<Skeleton />}>
       {(data) => {
         return (
           <div className="overflow-x-auto rounded group-has-[[data-pending]]:animate-pulse">

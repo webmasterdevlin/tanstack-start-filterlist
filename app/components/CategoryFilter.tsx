@@ -1,15 +1,11 @@
-import { useNavigate, useRouter } from '@tanstack/react-router';
+import { useLoaderData, useNavigate, useRouter } from '@tanstack/react-router';
 import { use } from 'react';
 import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
-import type { Category } from '@prisma/client';
 
-type Props = {
-  categoriesPromise: Promise<Record<string, Category>>;
-};
-
-export default function CategoryFilter({ categoriesPromise }: Props) {
+export default function CategoryFilter() {
   const router = useRouter();
+  const { categoriesPromise } = useLoaderData({ from: '__root__' });
   const categoriesMap = use(categoriesPromise);
   const navigate = useNavigate({ from: Route.fullPath });
   const { category } = Route.useSearch();

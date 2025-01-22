@@ -1,17 +1,15 @@
-import { use } from 'react';
 import { Route } from '@/routes/$tab';
-import type { TaskStatus, TaskSummary } from '@/types/task';
+import type { TaskStatus } from '@/types/task';
+import { useLoaderData } from '@tanstack/react-router';
+import { use } from 'react';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
 import Skeleton from './ui/Skeleton';
 import NavTab from './ui/nav-tabs/NavTab';
 import NavTabs from './ui/nav-tabs/NavTabs';
 
-type Props = {
-  taskSummaryPromise: Promise<TaskSummary>;
-};
-
-export default function StatusTabs({ taskSummaryPromise }: Props) {
+export default function StatusTabs() {
+  const { taskSummaryPromise } = useLoaderData({ from: '__root__' });
   const taskSummary = use(taskSummaryPromise);
   const activeTab = Route.useParams().tab; // as TaskStatus; no need to cast
 

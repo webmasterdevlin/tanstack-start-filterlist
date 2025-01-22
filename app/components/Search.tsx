@@ -1,6 +1,5 @@
 import { useNavigate, useRouter } from '@tanstack/react-router';
 import { Route } from '@/routes/$tab';
-import type { TaskStatus } from '@/types/task';
 import SearchStatus from './ui/SearchStatus';
 
 export default function Search() {
