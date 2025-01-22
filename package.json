@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "npx prisma generate && npx vinxi build",
+    "build": "bunx prisma generate && bunx vinxi build",
     "start": "vinxi start",
-    "prisma.studio": "npx prisma studio",
+    "prisma.studio": "bunx prisma studio",
     "prisma.seed": "tsx prisma/seed.ts",
-    "prisma.migrate": "npx prisma migrate dev",
-    "prisma.push": "npx prisma db push"
+    "prisma.migrate": "bunx prisma migrate dev",
+    "prisma.push": "bunx prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",
