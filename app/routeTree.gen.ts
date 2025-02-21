@@ -10,9 +10,9 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as TabIndexImport } from './routes/$tab/index'
+import { Route as rootRoute } from './routes/__root';
+import { Route as IndexImport } from './routes/index';
+import { Route as TabIndexImport } from './routes/$tab/index';
 
 // Create/Update Routes
 
@@ -20,75 +20,75 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const TabIndexRoute = TabIndexImport.update({
   id: '/$tab/',
   path: '/$tab/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/$tab/': {
-      id: '/$tab/'
-      path: '/$tab'
-      fullPath: '/$tab'
-      preLoaderRoute: typeof TabIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/$tab/';
+      path: '/$tab';
+      fullPath: '/$tab';
+      preLoaderRoute: typeof TabIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/$tab': typeof TabIndexRoute
+  '/': typeof IndexRoute;
+  '/$tab': typeof TabIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/$tab': typeof TabIndexRoute
+  '/': typeof IndexRoute;
+  '/$tab': typeof TabIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/$tab/': typeof TabIndexRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexRoute;
+  '/$tab/': typeof TabIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$tab'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$tab'
-  id: '__root__' | '/' | '/$tab/'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: '/' | '/$tab';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/' | '/$tab';
+  id: '__root__' | '/' | '/$tab/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  TabIndexRoute: typeof TabIndexRoute
+  IndexRoute: typeof IndexRoute;
+  TabIndexRoute: typeof TabIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabIndexRoute: TabIndexRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

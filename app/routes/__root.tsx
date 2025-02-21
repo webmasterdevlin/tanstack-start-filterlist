@@ -1,9 +1,5 @@
 import globalStyle from '../globals.css?url';
-import {
-  Outlet,
-  ScrollRestoration,
-  createRootRouteWithContext,
-} from '@tanstack/react-router';
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, {
@@ -137,7 +133,6 @@ export function RootComponent() {
           <Outlet />
         </div>
         <LoadTime />
-        <ScrollRestoration />
         <Scripts />
       </div>
       <Suspense>
@@ -161,7 +156,6 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         {children}
-        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
