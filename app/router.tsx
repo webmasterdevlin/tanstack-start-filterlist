@@ -21,7 +21,7 @@ export function createRouter() {
       context: {
         queryClient,
       },
-      defaultPreload: 'viewport',
+      defaultPreload: 'intent',
       defaultStaleTime: 1000 * 60 * 5, // 5 minutes
       defaultErrorComponent: DefaultCatchBoundary,
       defaultNotFoundComponent: () => <NotFound />,

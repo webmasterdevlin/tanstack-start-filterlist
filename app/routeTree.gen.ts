@@ -10,85 +10,104 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as IndexImport } from './routes/index';
-import { Route as TabIndexImport } from './routes/$tab/index';
+import { Route as rootRoute } from './routes/__root'
+import { Route as DevlinImport } from './routes/devlin'
+import { Route as AuroraImport } from './routes/aurora'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const DevlinRoute = DevlinImport.update({
+  id: '/devlin',
+  path: '/devlin',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuroraRoute = AuroraImport.update({
+  id: '/aurora',
+  path: '/aurora',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any);
-
-const TabIndexRoute = TabIndexImport.update({
-  id: '/$tab/',
-  path: '/$tab/',
-  getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    '/$tab/': {
-      id: '/$tab/';
-      path: '/$tab';
-      fullPath: '/$tab';
-      preLoaderRoute: typeof TabIndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/aurora': {
+      id: '/aurora'
+      path: '/aurora'
+      fullPath: '/aurora'
+      preLoaderRoute: typeof AuroraImport
+      parentRoute: typeof rootRoute
+    }
+    '/devlin': {
+      id: '/devlin'
+      path: '/devlin'
+      fullPath: '/devlin'
+      preLoaderRoute: typeof DevlinImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/$tab': typeof TabIndexRoute;
+  '/': typeof IndexRoute
+  '/aurora': typeof AuroraRoute
+  '/devlin': typeof DevlinRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/$tab': typeof TabIndexRoute;
+  '/': typeof IndexRoute
+  '/aurora': typeof AuroraRoute
+  '/devlin': typeof DevlinRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  '/': typeof IndexRoute;
-  '/$tab/': typeof TabIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/aurora': typeof AuroraRoute
+  '/devlin': typeof DevlinRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/$tab';
-  fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/$tab';
-  id: '__root__' | '/' | '/$tab/';
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/aurora' | '/devlin'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/aurora' | '/devlin'
+  id: '__root__' | '/' | '/aurora' | '/devlin'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  TabIndexRoute: typeof TabIndexRoute;
+  IndexRoute: typeof IndexRoute
+  AuroraRoute: typeof AuroraRoute
+  DevlinRoute: typeof DevlinRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  TabIndexRoute: TabIndexRoute,
-};
+  AuroraRoute: AuroraRoute,
+  DevlinRoute: DevlinRoute,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -97,14 +116,18 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/$tab/"
+        "/aurora",
+        "/devlin"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/$tab/": {
-      "filePath": "$tab/index.tsx"
+    "/aurora": {
+      "filePath": "aurora.tsx"
+    },
+    "/devlin": {
+      "filePath": "devlin.tsx"
     }
   }
 }

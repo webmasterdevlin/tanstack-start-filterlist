@@ -1,16 +1,12 @@
 import globalStyle from '../globals.css?url';
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
+import {
+  Link,
+  Outlet,
+  createRootRouteWithContext,
+} from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import { lazy, Suspense, type ReactNode } from 'react';
-import CategoryFilter, {
-  CategoryFilterSkeleton,
-} from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
-import ProjectInfo, { ProjectInfoSkeleton } from '@/components/ProjectInfo';
-import Search from '@/components/Search';
-import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
-import { getCategoriesMapFn } from '@/data/functions/category';
-import { getTaskSummaryFn } from '@/data/functions/task';
 import { QueryClient } from '@tanstack/react-query';
 
 interface RootRouterContext {
@@ -60,12 +56,6 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
       ],
     };
   },
-  loader: () => {
-    return {
-      categoriesPromise: getCategoriesMapFn(),
-      taskSummaryPromise: getTaskSummaryFn(),
-    };
-  },
 });
 
 const TanStackRouterDevtools =
@@ -113,23 +103,13 @@ export function RootComponent() {
         }
       >
         <div className="group flex flex-col gap-10">
+          <nav className="flex gap-6">
+            <Link to="/devlin">DEVLIN</Link>
+            <Link to="/aurora">AURORA</Link>
+          </nav>
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
-            <Suspense fallback={<ProjectInfoSkeleton />}>
-              <ProjectInfo />
-            </Suspense>
           </div>
-          <div className="flex flex-col gap-6">
-            <h2>Task list</h2>
-            <Suspense fallback={<StatusTabsSkeleton />}>
-              <StatusTabs />
-            </Suspense>
-          </div>
-          <div className="h-[1px] bg-primary" />
-          <Search />
-          <Suspense fallback={<CategoryFilterSkeleton />}>
-            <CategoryFilter />
-          </Suspense>
           <Outlet />
         </div>
         <LoadTime />
