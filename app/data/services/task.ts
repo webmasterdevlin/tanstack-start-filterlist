@@ -28,8 +28,18 @@ export async function getTasks(filter?: {
         filter?.q
           ? {
               OR: [
-                { title: { contains: filter.q } },
-                { description: { contains: filter.q } },
+                {
+                  title: {
+                    contains: filter.q.toLowerCase(),
+                    mode: 'insensitive',
+                  },
+                },
+                {
+                  description: {
+                    contains: filter.q.toLowerCase(),
+                    mode: 'insensitive',
+                  },
+                },
               ],
             }
           : {},
