@@ -42,3 +42,4 @@ yarn-error.log*
 .output/
 .vinxi/
 .netlify/
+dist/

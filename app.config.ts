@@ -9,4 +9,8 @@ export default defineConfig({
       }),
     ],
   },
+
+  server: {
+    preset: 'netlify',
+  },
 });
