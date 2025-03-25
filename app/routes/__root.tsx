@@ -1,6 +1,6 @@
 import globalStyle from '../globals.css?url';
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
-import { Meta, Scripts } from '@tanstack/start';
+import { Meta, Scripts } from '@tanstack/react-start';
 import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, {
   CategoryFilterSkeleton,
