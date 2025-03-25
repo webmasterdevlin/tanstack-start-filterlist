@@ -41,3 +41,4 @@ yarn-error.log*
 .idea/
 .output/
 .vinxi/
+.netlify/
