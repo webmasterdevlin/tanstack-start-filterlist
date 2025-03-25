@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "npx prisma generate --no-engine && vinxi build",
+    "build": "vinxi build",
     "start": "vinxi start",
     "prisma.studio": "npx prisma studio",
     "prisma.seed": "tsx prisma/seed.ts",
