@@ -33,10 +33,12 @@ export const Route = createFileRoute('/$tab/')({
   },
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
   loaderDeps: ({ search: { category, q } }) => {
+    console.log('loaderDeps', { category, q });
     return { category, q };
   },
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
   loader: ({ deps: { category, q }, params: { tab } }) => {
+    console.log('loader', { category, q, tab });
     return {
       tasksPromise: getTasksFn({
         data: {
