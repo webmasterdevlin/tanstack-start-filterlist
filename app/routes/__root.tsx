@@ -1,6 +1,10 @@
 import globalStyle from '../globals.css?url';
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
-import { Meta, Scripts } from '@tanstack/react-start';
+import {
+  HeadContent,
+  Outlet,
+  createRootRouteWithContext,
+  Scripts,
+} from '@tanstack/react-router';
 import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, {
   CategoryFilterSkeleton,
@@ -76,7 +80,7 @@ const TanStackRouterDevtools =
     : lazy(() =>
         // Lazy load in development
         {
-          return import('@tanstack/router-devtools').then((res) => {
+          return import('@tanstack/react-router-devtools').then((res) => {
             return {
               default: res.TanStackRouterDevtools,
               // For Embedded Mode
@@ -152,7 +156,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html>
       <head>
-        <Meta />
+        <HeadContent />
       </head>
       <body>
         {children}
