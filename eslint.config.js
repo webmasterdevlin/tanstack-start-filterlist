@@ -9,14 +9,17 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   {
     ignores: [
+      '.netlify',
       'node_modules/',
       'dist/',
       '.vite/',
+      'prisma/',
       'public/',
-      'package-lock.json',
+      '.env',
+      '.gitignore',
       '.prettierrc',
       '.prettierignore',
-      '.env',
+      'package-lock.json',
     ],
   },
   {
