@@ -1,5 +1,7 @@
 import { slow } from '@/utils/slow';
-import { prisma } from '../../db';
+import { PrismaClient } from 'generated/prisma';
+
+const prisma = new PrismaClient();
 
 export async function getProject() {
   console.log('getProject');

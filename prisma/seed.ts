@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from 'generated/prisma';
 
 const prisma = new PrismaClient();
 
@@ -84,7 +84,8 @@ const TODOS = [
   {
     categoryId: 4,
     createdAt: new Date('2024-06-03T00:00:00Z'),
-    description: 'Research user personas for the application to get a better understanding of the target audience',
+    description:
+      'Research user personas for the application to get a better understanding of the target audience',
     projectId: 'b3876ae0-bdbf-4c04-8230-85d3a6da15e9',
     status: 'done',
     title: 'Research user personas',
@@ -92,7 +93,8 @@ const TODOS = [
   {
     categoryId: 1,
     createdAt: new Date('2024-07-03T00:00:00Z'),
-    description: 'Implement the homescreen of the application when the Figma design is available',
+    description:
+      'Implement the homescreen of the application when the Figma design is available',
     projectId: 'b3876ae0-bdbf-4c04-8230-85d3a6da15e9',
     status: 'todo',
     title: 'Implement the homescreen',
@@ -108,7 +110,8 @@ const TODOS = [
   {
     categoryId: 1,
     createdAt: new Date('2024-07-03T00:00:00Z'),
-    description: 'Enable PWA support for the application so it can be installed on mobile devices',
+    description:
+      'Enable PWA support for the application so it can be installed on mobile devices',
     projectId: 'b3876ae0-bdbf-4c04-8230-85d3a6da15e9',
     status: 'todo',
     title: 'Enable PWA support',
@@ -150,7 +153,7 @@ const TODOS = [
 
 async function seedTodos() {
   await Promise.all(
-    PROJECTS.map(project => {
+    PROJECTS.map((project) => {
       return prisma.project.create({
         data: {
           companyName: project.companyName,
@@ -161,16 +164,16 @@ async function seedTodos() {
           startDate: project.startDate,
         },
       });
-    }),
+    })
   )
     .then(() => {
       return console.info('[SEED] Successfully create project records');
     })
-    .catch(e => {
+    .catch((e) => {
       return console.error('[SEED] Failed to create project records', e);
     });
   await Promise.all(
-    TEAMMEMBERS.map(member => {
+    TEAMMEMBERS.map((member) => {
       return prisma.teamMember.create({
         data: {
           id: member.id,
@@ -178,32 +181,32 @@ async function seedTodos() {
           role: member.role,
         },
       });
-    }),
+    })
   )
     .then(() => {
       return console.info('[SEED] Successfully create teamMember records');
     })
-    .catch(e => {
+    .catch((e) => {
       return console.error('[SEED] Failed to create teamMember records', e);
     });
   await Promise.all(
-    CATEGORIES.map(category => {
+    CATEGORIES.map((category) => {
       return prisma.category.create({
         data: {
           id: category.id,
           name: category.name,
         },
       });
-    }),
+    })
   )
     .then(() => {
       return console.info('[SEED] Successfully create category records');
     })
-    .catch(e => {
+    .catch((e) => {
       return console.error('[SEED] Failed to create category records', e);
     });
   await Promise.all(
-    TODOS.map(task => {
+    TODOS.map((task) => {
       return prisma.task.create({
         data: {
           categoryId: task.categoryId,
@@ -214,12 +217,12 @@ async function seedTodos() {
           title: task.title,
         },
       });
-    }),
+    })
   )
     .then(() => {
       return console.info('[SEED] Successfully created task records');
     })
-    .catch(e => {
+    .catch((e) => {
       return console.error('[SEED] Failed to create task records', e);
     });
 }

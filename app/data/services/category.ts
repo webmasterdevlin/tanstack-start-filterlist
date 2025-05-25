@@ -1,6 +1,8 @@
 import { cache } from 'react';
 import { slow } from '@/utils/slow';
-import { prisma } from '../../db';
+import { PrismaClient } from 'generated/prisma';
+
+const prisma = new PrismaClient();
 
 export const getCategoriesMap = cache(async () => {
   console.log('getCategoriesMap');
