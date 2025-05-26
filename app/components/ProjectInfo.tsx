@@ -1,9 +1,8 @@
-import React from 'react';
+import { use, type ReactNode } from 'react';
 import Skeleton from './ui/Skeleton';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { projectQueryOptions } from '@/state/server/queries/projectQueries';
+import { useLoaderData } from '@tanstack/react-router';
 
-function Chip({ children }: { children: React.ReactNode }) {
+function Chip({ children }: { children: ReactNode }) {
   return (
     <span className="w-fit bg-black px-2 py-1 uppercase text-white dark:bg-white dark:text-black">
       {children}
@@ -21,7 +20,8 @@ function Info({ label, value }: { label: string; value: string }) {
 }
 
 export default function ProjectInfo() {
-  const { data: project } = useSuspenseQuery(projectQueryOptions());
+  const { projectPromise } = useLoaderData({ from: '__root__' });
+  const project = use(projectPromise);
 
   return (
     <div className="flex gap-16">
@@ -31,11 +31,11 @@ export default function ProjectInfo() {
         <Info label="Company:" value={project.companyName} />
         <Info
           label="Duration:"
-          value={`${project.startDate.getFullYear()}-${project.expectedLaunchDate.getFullYear()}`}
+          value={`${new Date(project.startDate).getFullYear()}-${new Date(project.expectedLaunchDate).getFullYear()}`}
         />
         <Info
           label="Expected launch:"
-          value={project.expectedLaunchDate.toLocaleDateString()}
+          value={new Date(project.expectedLaunchDate).toLocaleDateString()}
         />
       </div>
       <div className="hidden flex-col gap-2 sm:flex">

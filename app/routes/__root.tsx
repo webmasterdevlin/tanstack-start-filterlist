@@ -1,11 +1,11 @@
 import globalStyle from '../globals.css?url';
+import { lazy, Suspense, type ReactNode } from 'react';
 import {
   HeadContent,
   Outlet,
-  createRootRouteWithContext,
   Scripts,
+  createRootRoute,
 } from '@tanstack/react-router';
-import { lazy, Suspense, type ReactNode } from 'react';
 import CategoryFilter, {
   CategoryFilterSkeleton,
 } from '@/components/CategoryFilter';
@@ -13,15 +13,11 @@ import LoadTime from '@/components/LoadTime';
 import ProjectInfo, { ProjectInfoSkeleton } from '@/components/ProjectInfo';
 import Search from '@/components/Search';
 import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
+import { getProjectFn } from '@/data/functions/project';
 import { getCategoriesMapFn } from '@/data/functions/category';
 import { getTaskSummaryFn } from '@/data/functions/task';
-import { QueryClient } from '@tanstack/react-query';
 
-interface RootRouterContext {
-  queryClient: QueryClient;
-}
-
-export const Route = createRootRouteWithContext<RootRouterContext>()({
+export const Route = createRootRoute({
   component: RootComponent,
   head: () => {
     return {
@@ -68,6 +64,7 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
     return {
       categoriesPromise: getCategoriesMapFn(),
       taskSummaryPromise: getTaskSummaryFn(),
+      projectPromise: getProjectFn(),
     };
   },
 });
@@ -85,24 +82,6 @@ const TanStackRouterDevtools =
               default: res.TanStackRouterDevtools,
               // For Embedded Mode
               // default: res.TanStackRouterDevtoolsPanel
-            };
-          });
-        }
-      );
-
-const ReactQueryDevtools =
-  process.env.NODE_ENV === 'production'
-    ? () => {
-        return null;
-      } // Render nothing in production
-    : lazy(() =>
-        // Lazy load in development
-        {
-          return import('@tanstack/react-query-devtools').then((res) => {
-            return {
-              default: res.ReactQueryDevtools,
-              // For Embedded Mode
-              // default: res.ReactQueryDevtoolsPanel
             };
           });
         }
@@ -141,12 +120,6 @@ export function RootComponent() {
       </div>
       <Suspense>
         <TanStackRouterDevtools position="bottom-right" />
-      </Suspense>
-      <Suspense>
-        <ReactQueryDevtools
-          buttonPosition="bottom-left"
-          initialIsOpen={false}
-        />
       </Suspense>
     </RootDocument>
   );
