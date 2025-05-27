@@ -58,7 +58,7 @@ function RouteComponent() {
 
   return (
     <Await promise={tasksPromise} fallback={<Skeleton />}>
-      {(data) => {
+      {(tasks) => {
         return (
           <div className="overflow-x-auto rounded group-has-[[data-pending]]:animate-pulse">
             <table>
@@ -72,7 +72,7 @@ function RouteComponent() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((task) => {
+                {tasks.map((task) => {
                   const color = getCategoryColor(task.categoryId);
                   return (
                     <tr key={task.id}>
@@ -101,7 +101,7 @@ function RouteComponent() {
                     </tr>
                   );
                 })}
-                {data.length === 0 && (
+                {tasks.length === 0 && (
                   <tr>
                     <td className="italic" colSpan={5}>
                       No tasks found
