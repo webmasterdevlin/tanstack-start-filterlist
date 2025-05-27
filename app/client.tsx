@@ -7,3 +7,4 @@ import { createRouter } from './router';
 const router = createRouter();
 
 hydrateRoot(document, <StartClient router={router} />);
+// This client entry point enables us to kick off client-side routing once the user's initial server request has fulfilled.

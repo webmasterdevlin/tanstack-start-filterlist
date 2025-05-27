@@ -19,3 +19,4 @@ declare module '@tanstack/react-router' {
     router: ReturnType<typeof createRouter>;
   }
 }
+// This router configuration will dictate the behavior of TanStack Router used within Start. Here, you can configure everything from the default preloading functionality to caching staleness.
