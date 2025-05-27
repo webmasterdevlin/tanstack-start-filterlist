@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigate, useRouter } from '@tanstack/react-router';
-import { use } from 'react';
 import { Route } from '@/routes/$tab';
 import ToggleGroup from './ui/ToggleGroup';
+import { use } from 'react';
 
 export default function CategoryFilter() {
   const router = useRouter();

@@ -6,7 +6,7 @@ import { NotFound } from './components/NotFound';
 export function createRouter() {
   return createTanStackRouter({
     routeTree,
-    defaultPreload: 'viewport',
+    defaultPreload: 'render',
     defaultStaleTime: 1000 * 60 * 5, // 5 minutes
     defaultErrorComponent: DefaultCatchBoundary,
     defaultNotFoundComponent: () => <NotFound />,

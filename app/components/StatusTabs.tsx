@@ -1,12 +1,12 @@
 import { Route } from '@/routes/$tab';
 import type { TaskStatus } from '@/types/task';
 import { useLoaderData } from '@tanstack/react-router';
-import { use } from 'react';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
 import Skeleton from './ui/Skeleton';
 import NavTab from './ui/nav-tabs/NavTab';
 import NavTabs from './ui/nav-tabs/NavTabs';
+import { use } from 'react';
 
 export default function StatusTabs() {
   const { taskSummaryPromise } = useLoaderData({ from: '__root__' });
