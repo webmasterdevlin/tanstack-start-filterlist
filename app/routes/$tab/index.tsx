@@ -10,7 +10,6 @@ export const Route = createFileRoute('/$tab/')({
   component: RouteComponent,
   preloadStaleTime: 1000 * 60 * 5,
   staleTime: 1000 * 60 * 5,
-  pendingComponent: () => <Skeleton />,
   params: {
     parse: (params) => {
       return {
