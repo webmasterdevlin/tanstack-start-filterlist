@@ -8,8 +8,6 @@ import Skeleton from '@/components/ui/Skeleton';
 
 export const Route = createFileRoute('/$tab/')({
   component: RouteComponent,
-  preloadStaleTime: 1000 * 60 * 5,
-  staleTime: 1000 * 60 * 5,
   params: {
     parse: (params) => {
       return {
